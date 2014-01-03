@@ -3,16 +3,18 @@
     "description": "Easy file attachment management using Eloquent in Laravel 4",
     "keywords": ["laravel", "file", "upload", "S3", "AWS", "paperclip", "lpm"],
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Travis Bennett",
-            "email": "tandrewbennett@hotmail.com"
-        }
-    ],
+    "authors": [{
+        "name": "Travis Bennett",
+        "email": "tandrewbennett@hotmail.com"
+    }],
+    "repositories": [{
+        "type": "vcs",
+        "url": "https://github.com/iwanwan/Imagine.git"
+    }],
     "require": {
-        "php": ">=5.4",
-        "imagine/imagine": "~0.5.0",
-        "illuminate/foundation": "~4"
+        "php":                    ">=5.4",
+        "imagine/imagine":        "dev-woi",
+        "illuminate/foundation":  "~4"
     },
     "require-dev": {
         "mikey179/vfsStream": "1.2.0",
