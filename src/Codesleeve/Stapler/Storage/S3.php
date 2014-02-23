@@ -113,6 +113,11 @@ class S3 implements StorageInterface
 	protected function getBucket()
 	{
 		$bucketName = $this->attachedFile->bucket;
+		
+		if ($this->attachedFile->assume_bucket_exists) {
+			return $bucketName;
+		}
+
 		if (!$this->bucketExists) {
 			$this->buildBucket($bucketName);
 		}
