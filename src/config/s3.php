@@ -99,5 +99,17 @@ return [
 	*/
 
 	'path' => ':attachment/:id/:style/:filename',
+
+	/*
+	|--------------------------------------------------------------------------
+	| Assume Bucket Exists
+	|--------------------------------------------------------------------------
+	|
+	| Set this to true if it is known that the bucket exists in S3. This prevents
+	| Stapler from querying S3 to check if a bucket exists, thus reducing latency
+	| and saving bandwidth costs.
+	|
+	*/
+	'assume_bucket_exists' => false,
 	
 ];

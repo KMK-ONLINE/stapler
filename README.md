@@ -207,6 +207,7 @@ Next, change the storage setting in config/stapler.php from 'filesystem' to 's3'
 *   **ACL**: This is a string/array that should be one of the canned access policies that S3 provides (private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control). The default for Stapler is public-read.  An associative array (style => permission) may be passed to specify permissions on a per style basis.
 *   **scheme**: The protocol for the URLs generated to your S3 assets. Can be either 'http' or 'https'.  Defaults to 'http' when your ACL is 'public-read' (the default) and 'https' when your ACL is anything else.
 *   **region**: The region name of your bucket (e.g. 'us-east-1', 'us-west-1', 'us-west-2', 'eu-west-1').  Determines the base url where your objects are stored at (e.g a region of us-west-2 has a base url of s3-us-west-2.amazonaws.com).  The default value for this field is an empty (US Standard *).  You can go [here](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) for a more complete list/explanation of regions.
+*   **assume_bucket_exists**: This setting controls whether Stapler queries S3 to check if the bucket exists or not. If you know for sure that the bucket exists, then setting this setting to true will reduce latency and also help save costs.
 
 Default values:
 *   **path**: ':attachment/:id/:style/:filename'
@@ -437,7 +438,6 @@ $profilePicture->photo->destroy();
 // For finer grained control, you can remove thumbnail files only (attachment attributes in the model will not be emptied).
 $profilePicture->photo->destroy(['thumbnail']);
 ```
-
 You may also reprocess uploaded images on an attachment by calling the reprocess() command (this is very useful for adding new styles to an existing attachment type where records have already been uploaded).
 
 ```php

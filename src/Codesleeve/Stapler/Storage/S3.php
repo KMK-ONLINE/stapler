@@ -6,7 +6,7 @@ class S3 implements StorageInterface
 {
 	/**
 	 * The current attachedFile object being processed.
-	 * 
+	 *
 	 * @var Codesleeve\Stapler\Attachment
 	 */
 	public $attachedFile;
@@ -20,14 +20,14 @@ class S3 implements StorageInterface
 
 	/**
 	 * Boolean flag indicating if this attachment's bucket currently exists.
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $bucketExists = false;
 
 	/**
 	 * Constructor method
-	 * 
+	 *
 	 * @param Codesleeve\Stapler\Attachment $attachedFile
 	 * @param Codesleeve\Stapler\Storage\S3ClientManager $s3ClientManager
 	 */
@@ -39,9 +39,9 @@ class S3 implements StorageInterface
 
 	/**
 	 * Return the url for a file upload.
-	 * 
-	 * @param  string $styleName 
-	 * @return string          
+	 *
+	 * @param  string $styleName
+	 * @return string
 	 */
 	public function url($styleName)
 	{
@@ -50,9 +50,9 @@ class S3 implements StorageInterface
 
 	/**
 	 * Return the key the uploaded file object is stored under within a bucket.
-	 * 
-	 * @param  string $styleName 
-	 * @return string          
+	 *
+	 * @param  string $styleName
+	 * @return string
 	 */
 	public function path($styleName)
 	{
@@ -61,7 +61,7 @@ class S3 implements StorageInterface
 
 	/**
 	 * Remove an attached file.
-	 * 
+	 *
 	 * @param  array $filePaths
 	 * @return void
 	 */
@@ -77,9 +77,9 @@ class S3 implements StorageInterface
 	 * The file can be an actual uploaded file object or the path to
 	 * a resized image file on disk.
 	 *
-	 * @param  UploadedFile $file 
+	 * @param  UploadedFile $file
 	 * @param  string $filePath
-	 * @return void 
+	 * @return void
 	 */
 	public function move($file, $filePath)
 	{
@@ -107,12 +107,17 @@ class S3 implements StorageInterface
 	/**
 	 * This is a wrapper method for returning the name of an attachment's bucket.
 	 * If the bucket doesn't exist we'll build it first before returning it's name.
-	 * 
+	 *
 	 * @return string
 	 */
 	protected function getBucket()
 	{
 		$bucketName = $this->attachedFile->bucket;
+
+		if (isset($this->attachedFile->assume_bucket_exists) && $this->attachedFile->assume_bucket_exists) {
+			return $bucketName;
+		}
+
 		if (!$this->bucketExists) {
 			$this->buildBucket($bucketName);
 		}
@@ -122,7 +127,7 @@ class S3 implements StorageInterface
 
 	/**
 	 * Attempt to build a bucket (if it doesn't already exist).
-	 * 
+	 *
 	 * @param  string $bucketName
 	 * @return void
 	 */
